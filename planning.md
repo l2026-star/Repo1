@@ -70,7 +70,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A13 | ☐ | Dashboards | Defect dashboard; Portfolio dashboard |
 | A14 | ☐ | Permissions | Scheme with roles PMO Admin / PM / Team Member / Stakeholder Read-only |
 | A15 | ☐ | Issue security | Hide restricted project (Customer Portal) from Stakeholder RO |
-| A16 | ☐ | Sample data | Four demo projects, milestones, risks, actions, enhancement backlog, one defect — **draft for review before bulk creation** |
+| A16 | ◧ | Sample data | PARTIAL — 4 Project register issues created (PMOD-1 ERP/Amber, PMOD-2 Cloud/Green, PMOD-3 Customer Portal/Red, PMOD-4 Payroll/Green). Bulk backlog (milestones, risks, ~10 enhancements, UAT defect) awaits review per the gate |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
 
