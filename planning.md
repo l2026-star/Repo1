@@ -9,6 +9,19 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 - **Authority:** Thompson is named approver; **Liss authorised** this greenfield run (2026-06-19).
 - **Last update:** 2026-06-19.
 
+## Execution status — 2026-06-19 (update 4 — after MCP fix)
+
+The dev-team fix covered **create_status** and **create_workflow** (both now work). Implemented:
+
+- ✅ **Workflows APPLIED (A6–A8):** created 9 statuses + 4 workflows — **PMO Project Lifecycle** (Intake→Close), **PMO Enhancement Lifecycle** (Submitted→Closed), **PMO Defect Lifecycle** (Open→Done), **PMO Baseline**. Workflow scheme set on PMOD via **draft + publish** on the project's own scheme **10602** (status migration: Project In Progress→Deliver, Done→Close). Project issues PMOD-1..4 transitioned to their stages (Deliver/Plan/Deliver/Initiate).
+- ✅ **A10 Forms:** Enhancement Intake (conditional AI) + Project Intake — both created.
+- ✅ **Backfilled** Likelihood (1-Rare…5-Almost Certain) on the 6 risks + Reason for Hold on PMOD-28.
+- ◧ **A15 Issue security PARTIAL:** scheme **10133** + level **10101** ("Restricted — Customer Portal") created; **member-add + project-assign BLOCKED by NEW tool bugs** — `add_security_level_member` → "Invalid request payload"; `assign_issue_security_scheme` → 404 (wrong endpoint).
+- ❌ **A11 Automation STILL BLOCKED:** `create_automation_rule` → "request body could not be parsed" (not addressed by the fix).
+- ☐ **Remaining:** A9 UAT approval (workflow approval config / manual), A13 dashboard gadgets (no MCP gadget tool — add in-app), A14 permission-scheme grants (4 roles exist; grants pending).
+
+> New tool bugs logged for the dev team on the "Admin MCP Tooling Issues" child page.
+
 ## Execution status — 2026-06-19 (update 3)
 
 - ✅ **Done:** A1 Project, A2 Issue types, A3 Fields, A4 Options, A5 Screens, A12 Boards & sprints (board 545; Sprint 1 = 1917, Sprint 2 = 1918).
@@ -73,16 +86,16 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A3 | ✅ | Custom fields | DONE — 28 created (cf 11845–11872); 3 reused |
 | A4 | ✅ | Select field options | DONE — options on all 15 new select/checkbox fields |
 | A5 | ✅ | Screens / field config | DONE — 31 fields on PMOD Create (10744/tab 10747) + Edit/View (10745/tab 10748). Shared screen across types (per-type screens = future refinement); stage-mandatory enforcement to be done via workflow validators (A6) |
-| A6 | ☐ | Workflow — Project | Intake → Initiate → Plan → Deliver → Close; validators on stage-mandatory fields |
-| A7 | ☐ | Workflow — Enhancement | Submitted → Triaged → Approved → Ready → In Progress → Delivered → Closed; ARB + Readiness gates |
-| A8 | ☐ | Workflow — Defect | Open → Triage → In Progress → Ready for Retest → Done |
-| A9 | ☐ | Approval — UAT sign-off | Approval step capturing approver + timestamp + comment |
+| A6 | ✅ | Workflow — Project | DONE — PMO Project Lifecycle (Intake→Close) applied to PMOD via draft+publish |
+| A7 | ✅ | Workflow — Enhancement | DONE — PMO Enhancement Lifecycle (Submitted→Closed) applied |
+| A8 | ✅ | Workflow — Defect | DONE — PMO Defect Lifecycle (Open→Done) applied |
+| A9 | ❌ | Approval — UAT sign-off | Manual/workflow-approval config — not done (sits with Xray Test Plan, Layer C) |
 | A10 | ◧ | Forms | Enhancement Intake form created with conditional AI section (id 5f6245e4…) ✅; Project Intake form pending. NB form question type `tp` rejected — use `tl` |
 | A11 | ❌ | Automation | BLOCKED — create_automation_rule "request body could not be parsed"; opaque rule-tree schema. Build in-app or revisit |
 | A12 | ☐ | Boards & sprints | Enhancement board + quick filters; Sprint 1 (closed) + Sprint 2 (active) |
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
 | A14 | ◧ | Permissions | 4 project roles created — PMO Admin (10198), PM (10199), Team Member (10200), Stakeholder Read-only (10201); permission-scheme grants pending |
-| A15 | ☐ | Issue security | Hide restricted project (Customer Portal) from Stakeholder RO |
+| A15 | ◧ | Issue security | Scheme 10133 + level 10101 created; member-add + project-assign BLOCKED (tool bugs) |
 | A16 | ✅ | Sample data | DONE — 30 issues (4 Projects, 9 milestones, 6 risks, 10 enhancements across 2 sprints, 1 defect). Sprint 1 closed/delivered, Sprint 2 active |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
