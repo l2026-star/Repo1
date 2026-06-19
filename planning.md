@@ -12,7 +12,7 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 ## Execution status — 2026-06-19 (update 3)
 
 - ✅ **Done:** A1 Project, A2 Issue types, A3 Fields, A4 Options, A5 Screens, A12 Boards & sprints (board 545; Sprint 1 = 1917, Sprint 2 = 1918).
-- ◧ **In progress:** A16 Sample data — 4 Project records done; full dataset (milestones, risks, ~10 enhancements, UAT defect) being built.
+- ✅ **A16 Sample data DONE:** 30 issues — 4 Projects (PMOD-1..4), 9 milestones (PMOD-5..13, criticals flagged), 6 risks (PMOD-14..19, 2 escalated), 10 enhancements (PMOD-20..29; Sprint 1=1917 closed with 6 delivered/Done, Sprint 2=1918 active with 4), 1 UAT defect (PMOD-30, linked to PMOD-3). NB: reused Likelihood (cf_11330) + Reason for Hold (cf_11255) left unset (option values unreadable in agent) — set manually if needed.
 - ❌ **BLOCKED (Admin MCP tooling):** A6–A9 (Project/Enhancement/Defect **workflows**, custom **statuses**, UAT **approval**).
   - `create_status` → opaque `Invalid request payload` for both GLOBAL and PROJECT scope.
   - `create_workflow` with inline `newStatuses` → tool schema rejects (`Expected object, received array`); transitions confirmed to need the new `links` array (not `from`/`to`).
@@ -81,7 +81,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A13 | ☐ | Dashboards | Defect dashboard; Portfolio dashboard |
 | A14 | ☐ | Permissions | Scheme with roles PMO Admin / PM / Team Member / Stakeholder Read-only |
 | A15 | ☐ | Issue security | Hide restricted project (Customer Portal) from Stakeholder RO |
-| A16 | ◧ | Sample data | PARTIAL — 4 Project register issues created (PMOD-1 ERP/Amber, PMOD-2 Cloud/Green, PMOD-3 Customer Portal/Red, PMOD-4 Payroll/Green). Bulk backlog (milestones, risks, ~10 enhancements, UAT defect) awaits review per the gate |
+| A16 | ✅ | Sample data | DONE — 30 issues (4 Projects, 9 milestones, 6 risks, 10 enhancements across 2 sprints, 1 defect). Sprint 1 closed/delivered, Sprint 2 active |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
 
@@ -95,7 +95,7 @@ Xray issue types are already present site-wide (enable on PMOD = manual, C1).
 | Active instance confirmed = di-demo | Executing session | ✅ 2026-06-19 |
 | Layer A audit findings reported | Executing session | ✅ (to Liss) |
 | Approval to apply | Thompson | ✅ Liss authorised in lieu (2026-06-19) |
-| Layer A applied + verified | Executing session | ⏳ A1–A5 done; A6–A16 pending |
+| Layer A applied + verified | Executing session | ⏳ A1–A5, A12, A16 done; A6–A9 blocked; A10/A11/A13/A14/A15 pending |
 | Layers B/C flagged manual-required | Executing session | ✅ |
 | End-to-end validation pass (Config Guide Layer E) | Operator | ☐ |
 
