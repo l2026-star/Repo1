@@ -59,7 +59,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A2 | ✅ | Issue type scheme | DONE — scheme 12122 assigned; created Action/Issue/Decision/Enhancement; reused the rest |
 | A3 | ✅ | Custom fields | DONE — 28 created (cf 11845–11872); 3 reused |
 | A4 | ✅ | Select field options | DONE — options on all 15 new select/checkbox fields |
-| A5 | ☐ | Screens / field config | NEXT — add fields to Project/Risk/Enhancement/Bug screens; stage-mandatory fields |
+| A5 | ✅ | Screens / field config | DONE — 31 fields on PMOD Create (10744/tab 10747) + Edit/View (10745/tab 10748). Shared screen across types (per-type screens = future refinement); stage-mandatory enforcement to be done via workflow validators (A6) |
 | A6 | ☐ | Workflow — Project | Intake → Initiate → Plan → Deliver → Close; validators on stage-mandatory fields |
 | A7 | ☐ | Workflow — Enhancement | Submitted → Triaged → Approved → Ready → In Progress → Delivered → Closed; ARB + Readiness gates |
 | A8 | ☐ | Workflow — Defect | Open → Triage → In Progress → Ready for Retest → Done |
@@ -84,7 +84,7 @@ Xray issue types are already present site-wide (enable on PMOD = manual, C1).
 | Active instance confirmed = di-demo | Executing session | ✅ 2026-06-19 |
 | Layer A audit findings reported | Executing session | ✅ (to Liss) |
 | Approval to apply | Thompson | ✅ Liss authorised in lieu (2026-06-19) |
-| Layer A applied + verified | Executing session | ⏳ A1–A4 done; A5–A16 pending |
+| Layer A applied + verified | Executing session | ⏳ A1–A5 done; A6–A16 pending |
 | Layers B/C flagged manual-required | Executing session | ✅ |
 | End-to-end validation pass (Config Guide Layer E) | Operator | ☐ |
 
@@ -99,9 +99,15 @@ Xray issue types are already present site-wide (enable on PMOD = manual, C1).
 
 ## Next actions
 
-- [ ] A5: inspect PMOD screen scheme; add the new fields to the relevant screens.
-- [ ] A6–A9: build Project / Enhancement / Defect workflows + UAT approval (latest-doc check first; flag if MCP workflow API is a blocker).
-- [ ] A10–A11: Forms + automation rules.
-- [ ] A12–A15: boards/sprints, dashboards, permissions, issue security.
-- [ ] A16: draft sample data for review, then create.
-- [ ] Update the Confluence ledger + this file at each checkpoint.
+- [ ] A16: sample data — create the four Project register issues first (unblocks BigPicture portfolio + dashboards), then milestones/risks/enhancements/defect. Label per demo project for BigPicture scoping.
+- [ ] A12: confirm PMOD board type; create Scrum board if needed; Sprint 1 (closed) + Sprint 2 (active).
+- [ ] A14–A15: permission scheme + roles; issue security (hide Customer Portal from Stakeholder RO).
+- [ ] A6–A9: Project / Enhancement / Defect workflows + UAT approval (latest-doc check first; flag if MCP workflow API is a blocker — these are the most intricate via API).
+- [ ] A10–A11: Forms + automation rules (also intricate via API).
+- [ ] A13: dashboards.
+- [ ] Re-sync the Confluence ledger at the next milestone.
+
+> **Complexity note:** A6–A11 (workflows, approvals, forms, automation) are the
+> intricate, higher-risk items via the Admin MCP. If a specific operation isn't
+> supported/reliable, flag it as manual-required (like Layers B/C) rather than
+> forcing it.
