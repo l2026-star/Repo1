@@ -9,6 +9,17 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 - **Authority:** Thompson is named approver; **Liss authorised** this greenfield run (2026-06-19).
 - **Last update:** 2026-06-19.
 
+## Execution status — 2026-06-19 (update 3)
+
+- ✅ **Done:** A1 Project, A2 Issue types, A3 Fields, A4 Options, A5 Screens, A12 Boards & sprints (board 545; Sprint 1 = 1917, Sprint 2 = 1918).
+- ◧ **In progress:** A16 Sample data — 4 Project records done; full dataset (milestones, risks, ~10 enhancements, UAT defect) being built.
+- ❌ **BLOCKED (Admin MCP tooling):** A6–A9 (Project/Enhancement/Defect **workflows**, custom **statuses**, UAT **approval**).
+  - `create_status` → opaque `Invalid request payload` for both GLOBAL and PROJECT scope.
+  - `create_workflow` with inline `newStatuses` → tool schema rejects (`Expected object, received array`); transitions confirmed to need the new `links` array (not `from`/`to`).
+  - Atlassian dev-docs not retrievable in this environment to pin exact payloads.
+  - **Recommendation:** build the three workflows + custom statuses **manually in-app** (like Layers B/C), OR revisit once the Admin MCP `create_status`/`create_workflow` payloads are confirmed. The Stage field (Intake→Close) already gives the lifecycle vocabulary on issues in the interim.
+- ☐ **Pending:** A10 Forms, A11 Automation, A13 Dashboards, A14 Permissions, A15 Issue security. (A10/A11 to be attempted via MCP; flag if similarly blocked.)
+
 ## Workflow & guardrails (summary)
 
 1. di-demo ONLY for config; never write to production. Confirm active instance
