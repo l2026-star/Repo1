@@ -94,7 +94,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A11 | ❌ | Automation | BLOCKED — create_automation_rule "request body could not be parsed"; opaque rule-tree schema. Build in-app or revisit |
 | A12 | ☐ | Boards & sprints | Enhancement board + quick filters; Sprint 1 (closed) + Sprint 2 (active) |
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
-| A14 | ◧ | Permissions | 4 project roles created — PMO Admin (10198), PM (10199), Team Member (10200), Stakeholder Read-only (10201); permission-scheme grants pending |
+| A14 | ◧ | Permissions | Scheme **10510** + 29 grants created (4 roles); PMO Admin role seeded (Liss). **Project-assignment NOT possible via MCP** (no assign-permission-scheme-to-project tool) → assign in-app |
 | A15 | ◧ | Issue security | Scheme 10133 + level 10101 created; member-add + project-assign BLOCKED (tool bugs) |
 | A16 | ✅ | Sample data | DONE — 30 issues (4 Projects, 9 milestones, 6 risks, 10 enhancements across 2 sprints, 1 defect). Sprint 1 closed/delivered, Sprint 2 active |
 
