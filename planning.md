@@ -18,7 +18,9 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
   - `create_workflow` with inline `newStatuses` → tool schema rejects (`Expected object, received array`); transitions confirmed to need the new `links` array (not `from`/`to`).
   - Atlassian dev-docs not retrievable in this environment to pin exact payloads.
   - **Recommendation:** build the three workflows + custom statuses **manually in-app** (like Layers B/C), OR revisit once the Admin MCP `create_status`/`create_workflow` payloads are confirmed. The Stage field (Intake→Close) already gives the lifecycle vocabulary on issues in the interim.
-- ☐ **Pending:** A10 Forms, A11 Automation, A13 Dashboards, A14 Permissions, A15 Issue security. (A10/A11 to be attempted via MCP; flag if similarly blocked.)
+- ◧ **Partial (reliable):** A10 Forms (Enhancement Intake w/ conditional AI ✅; Project Intake pending), A13 Dashboards (2 containers 10100/10101 ✅; gadgets in-app), A14 Permissions (4 project roles ✅; permission-scheme grants pending).
+- ❌ **BLOCKED (also tooling):** A11 Automation — `create_automation_rule` returns "request body could not be parsed" (opaque rule-tree schema, same class as workflows). Recommend building rules in-app, or revisit with confirmed component schemas.
+- ☐ **Pending (reliable):** A15 Issue security (hide Customer Portal PMOD-3 from Stakeholder RO).
 
 ## Workflow & guardrails (summary)
 
@@ -75,11 +77,11 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A7 | ☐ | Workflow — Enhancement | Submitted → Triaged → Approved → Ready → In Progress → Delivered → Closed; ARB + Readiness gates |
 | A8 | ☐ | Workflow — Defect | Open → Triage → In Progress → Ready for Retest → Done |
 | A9 | ☐ | Approval — UAT sign-off | Approval step capturing approver + timestamp + comment |
-| A10 | ☐ | Forms | Project Intake; Enhancement Intake with conditional AI fields |
-| A11 | ☐ | Automation | 8 rules per Config Guide A7 |
+| A10 | ◧ | Forms | Enhancement Intake form created with conditional AI section (id 5f6245e4…) ✅; Project Intake form pending. NB form question type `tp` rejected — use `tl` |
+| A11 | ❌ | Automation | BLOCKED — create_automation_rule "request body could not be parsed"; opaque rule-tree schema. Build in-app or revisit |
 | A12 | ☐ | Boards & sprints | Enhancement board + quick filters; Sprint 1 (closed) + Sprint 2 (active) |
-| A13 | ☐ | Dashboards | Defect dashboard; Portfolio dashboard |
-| A14 | ☐ | Permissions | Scheme with roles PMO Admin / PM / Team Member / Stakeholder Read-only |
+| A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
+| A14 | ◧ | Permissions | 4 project roles created — PMO Admin (10198), PM (10199), Team Member (10200), Stakeholder Read-only (10201); permission-scheme grants pending |
 | A15 | ☐ | Issue security | Hide restricted project (Customer Portal) from Stakeholder RO |
 | A16 | ✅ | Sample data | DONE — 30 issues (4 Projects, 9 milestones, 6 risks, 10 enhancements across 2 sprints, 1 defect). Sprint 1 closed/delivered, Sprint 2 active |
 
@@ -95,7 +97,7 @@ Xray issue types are already present site-wide (enable on PMOD = manual, C1).
 | Active instance confirmed = di-demo | Executing session | ✅ 2026-06-19 |
 | Layer A audit findings reported | Executing session | ✅ (to Liss) |
 | Approval to apply | Thompson | ✅ Liss authorised in lieu (2026-06-19) |
-| Layer A applied + verified | Executing session | ⏳ A1–A5, A12, A16 done; A6–A9 blocked; A10/A11/A13/A14/A15 pending |
+| Layer A applied + verified | Executing session | ⏳ A1–A5, A12, A16 done; A10/A13/A14 partial; A6–A9 + A11 blocked (tooling); A15 pending |
 | Layers B/C flagged manual-required | Executing session | ✅ |
 | End-to-end validation pass (Config Guide Layer E) | Operator | ☐ |
 
