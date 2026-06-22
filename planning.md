@@ -9,6 +9,13 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 - **Authority:** Thompson is named approver; **Liss authorised** this greenfield run (2026-06-19).
 - **Last update:** 2026-06-19.
 
+## Execution status — 2026-06-19 (update 5 — automation rules built in-app)
+
+- ◧ **A11 Automation — 6 of 8 rules built** (in-app / via browser, not MCP):
+  - ✅ Rule 1 Variance & Financial RAG · ✅ Rule 2 Action reminders · ✅ Rule 3 Risk escalation · ✅ Rule 5 Readiness enforcement · ✅ Rule 7 UAT criteria check · ✅ Rule 8 High-severity defect alert.
+  - ☐ **Pending: Rule 4 (Mandatory Hold Reason)** and **Rule 6 (Enhancement stage notifications)** — not yet created.
+- Build aids on Confluence: *Automation Rules Design (A11)* + *Claude Browser Prompt — Rule 1*.
+
 ## Execution status — 2026-06-19 (update 4 — after MCP fix)
 
 The dev-team fix covered **create_status** and **create_workflow** (both now work). Implemented:
@@ -17,7 +24,7 @@ The dev-team fix covered **create_status** and **create_workflow** (both now wor
 - ✅ **A10 Forms:** Enhancement Intake (conditional AI) + Project Intake — both created.
 - ✅ **Backfilled** Likelihood (1-Rare…5-Almost Certain) on the 6 risks + Reason for Hold on PMOD-28.
 - ◧ **A15 Issue security PARTIAL:** scheme **10133** + level **10101** ("Restricted — Customer Portal") created; **member-add + project-assign BLOCKED by NEW tool bugs** — `add_security_level_member` → "Invalid request payload"; `assign_issue_security_scheme` → 404 (wrong endpoint).
-- ❌ **A11 Automation STILL BLOCKED:** `create_automation_rule` → "request body could not be parsed" (not addressed by the fix).
+- ◧ **A11 Automation — 6 of 8 rules now built** in-app (see update 5); only Rule 4 (Mandatory Hold Reason) & Rule 6 (Enhancement stage notifications) pending. (`create_automation_rule` MCP tool remained blocked, so rules were built manually.)
 - ☐ **Remaining:** A9 UAT approval (workflow approval config / manual), A13 dashboard gadgets (no MCP gadget tool — add in-app), A14 permission-scheme grants (4 roles exist; grants pending).
 
 > New tool bugs logged for the dev team on the "Admin MCP Tooling Issues" child page.
@@ -90,8 +97,8 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A7 | ✅ | Workflow — Enhancement | DONE — PMO Enhancement Lifecycle (Submitted→Closed) applied |
 | A8 | ✅ | Workflow — Defect | DONE — PMO Defect Lifecycle (Open→Done) applied |
 | A9 | ❌ | Approval — UAT sign-off | Manual/workflow-approval config — not done (sits with Xray Test Plan, Layer C) |
-| A10 | ◧ | Forms | Enhancement Intake form created with conditional AI section (id 5f6245e4…) ✅; Project Intake form pending. NB form question type `tp` rejected — use `tl` |
-| A11 | ❌ | Automation | BLOCKED — create_automation_rule "request body could not be parsed"; opaque rule-tree schema. Build in-app or revisit |
+| A10 | ✅ | Forms | DONE — Enhancement Intake (conditional AI) + Project Intake (id fdf2021d) both created |
+| A11 | ◧ | Automation | 6 of 8 rules built in-app (1 Variance/RAG, 2 Action reminders, 3 Risk escalation, 5 Readiness, 7 UAT criteria, 8 High-sev alert); **Rule 4 (Mandatory Hold Reason) & Rule 6 (Enhancement stage notifications) pending**. MCP create_automation_rule still blocked |
 | A12 | ☐ | Boards & sprints | Enhancement board + quick filters; Sprint 1 (closed) + Sprint 2 (active) |
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
 | A14 | ◧ | Permissions | Scheme **10510** + 29 grants created (4 roles); PMO Admin role seeded (Liss). **Project-assignment NOT possible via MCP** (no assign-permission-scheme-to-project tool) → assign in-app |
