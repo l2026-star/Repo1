@@ -103,7 +103,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
 | A14 | ◧ | Permissions | Scheme **10510** + 29 grants created (4 roles); PMO Admin role seeded (Liss). **Project-assignment NOT possible via MCP** (no assign-permission-scheme-to-project tool) → assign in-app |
 | A15 | ◧ | Issue security | Scheme 10133 + level 10101 created; member-add + project-assign BLOCKED (tool bugs) |
-| A16 | ✅ | Sample data | DONE — 30 issues (4 Projects, 9 milestones, 6 risks, 10 enhancements across 2 sprints, 1 defect). Sprint 1 closed/delivered, Sprint 2 active |
+| A16 | ✅ | Sample data | DONE — 30 core issues + RAID set added (Issue/Assumption/Decision/Dependency/Action ×3 = PMOD-40..54, Dependency added to scheme 12122). 4 Projects, 9 milestones, 6 risks, 10 enhancements (2 sprints), 1 defect |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
 
