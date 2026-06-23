@@ -13,14 +13,14 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 
 Added a software-delivery slice on board **546 "PMO SCRUM"** to demonstrate hybrid (Agile) execution:
 
-- ✅ **3 Epics:** PMOD-55 Customer Portal — Account Management · PMOD-56 Customer Portal — Payments & Billing · PMOD-57 ERP Integration Layer.
-- ✅ **6 Stories** (epic-parented, with **original estimates**): PMOD-58 Self-service profile editing (3d, →55) · PMOD-59 Password reset via email OTP (2d, →55) · PMOD-60 Saved payment methods (5d, →56) · PMOD-61 Invoice download PDF (2d, →56) · PMOD-64 ERP order sync API (8d, →57) · PMOD-65 Inventory webhook listener (5d, →57).
-- ✅ **3 Bugs** (epic-parented, estimates + priority): PMOD-62 Profile save fails on special characters (1d, High, →55) · PMOD-63 Duplicate charge on payment retry (4h, Highest, →56) · PMOD-66 Order sync drops line items over 50 (2d, High, →57).
-- ✅ **2 Sprints on board 546:** **Sprint 1 = 1919 (ACTIVE)** [PMOD-58/59/62/63] · **Sprint 2 = 1920 (future)** [PMOD-60/61/64]. Backlog: PMOD-65, PMOD-66.
-- ❌ **Components & Versions — BLOCKED via MCP (new tool gap).** The Admin MCP has **no** `create_component` / `create_version` tool (confirmed by name lookup); Jira rejects unknown names on create/update (`Version name 'Release 1.0' is not valid`). **Action:** create in-app (Project settings → Components and → Releases), then stamp onto the 9 issues via `update_issue`.
-  - **Proposed Components:** Frontend · Backend · Integration · Payments.
+- ✅ **5 Epics:** PMOD-55 Customer Portal — Account Management · PMOD-56 Customer Portal — Payments & Billing · PMOD-57 ERP Integration Layer · PMOD-68 Cloud Migration — Platform & Workloads · PMOD-69 Payroll Automation — Pay Run & Compliance.
+- ✅ **40 Stories** (all epic-parented, each with an **original estimate**): **PMOD-58–63** + **PMOD-70–103**, ~8 per epic across the 5 epics. Estimates range 4h–8d. Labels: CustomerPortal / ERP / CloudMigration / PayrollAutomation.
+- ✅ **3 Bugs** (epic-parented, estimates + priority): PMOD-64 Profile save fails on special characters (1d, High, →55) · PMOD-65 Duplicate charge on payment retry (4h, Highest, →56) · PMOD-66 Order sync drops line items over 50 (2d, High, →57).
+- ✅ **2 Sprints on board 546:** **Sprint 1 = 1919 (ACTIVE)** [PMOD-58/59/62/63] · **Sprint 2 = 1920 (future)** [PMOD-60/61/64]. Backlog: PMOD-65, PMOD-66 + the 34 new stories (PMOD-70–103).
+- ❌ **Components & Versions — BLOCKED via MCP (new tool gap).** The Admin MCP has **no** `create_component` / `create_version` tool (confirmed by name lookup); Jira rejects unknown names on create/update (`Version name 'Release 1.0' is not valid`). **Action:** create in-app (Project settings → Components and → Releases), then stamp onto the slice via `update_issue`.
+  - **Proposed Components:** Frontend · Backend · Payments · Integration · Infrastructure · Payroll.
   - **Proposed Versions (Releases):** Release 1.0 · Release 1.1 · Release 2.0.
-  - **Intended mapping (issue → component / fixVersion):** 58 Frontend/R1.0 · 59 Backend/R1.0 · 62 Frontend/R1.0 · 60 Payments/R1.1 · 61 Frontend/R1.1 · 63 Payments/R1.1 · 64 Integration/R2.0 · 65 Backend/R2.0 · 66 Integration/R2.0.
+  - **Default mapping rule (stamp once created):** by epic — Account Mgmt → Frontend/Backend; Payments & Billing → Payments; ERP Integration → Integration; Cloud Migration → Infrastructure; Payroll Automation → Payroll. Versions: Customer Portal R1.0/R1.1; ERP/Cloud/Payroll R2.0. Confirm the list with Liss before stamping.
 
 ## Execution status — 2026-06-19 (update 5 — automation rules built in-app)
 
@@ -116,7 +116,7 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
 | A14 | ◧ | Permissions | Scheme **10510** + 29 grants created (4 roles); PMO Admin role seeded (Liss). **Project-assignment NOT possible via MCP** (no assign-permission-scheme-to-project tool) → assign in-app |
 | A15 | ◧ | Issue security | Scheme 10133 + level 10101 created; member-add + project-assign BLOCKED (tool bugs) |
-| A16 | ✅ | Sample data | DONE — 30 core issues + RAID set (Issue/Assumption/Decision/Dependency/Action ×3 = PMOD-40..54, Dependency added to scheme 12122). 4 Projects, 9 milestones, 6 risks, 10 enhancements (2 sprints), 1 defect. **+ delivery slice PMOD-55..66** (3 epics, 6 stories, 3 bugs; original estimates; sprints 1919 active / 1920 future on board 546). Components/versions pending in-app (no MCP tool) |
+| A16 | ✅ | Sample data | DONE — 30 core issues + RAID set (Issue/Assumption/Decision/Dependency/Action ×3 = PMOD-40..54, Dependency added to scheme 12122). 4 Projects, 9 milestones, 6 risks, 10 enhancements (2 sprints), 1 defect. **+ delivery slice PMOD-55..103** (5 epics, 40 stories, 3 bugs; original estimates; sprints 1919 active / 1920 future on board 546). Components/versions pending in-app (no MCP tool) |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
 
