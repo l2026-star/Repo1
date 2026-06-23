@@ -7,7 +7,20 @@ Checklist** (`1450147852`). Keep this and the Confluence ledger in sync.
 - **Status legend:** ✅ done · ⚠️ drift · ❌ missing · ⏭️ manual-required · ☐ pending
 - **Workflow:** audit-first → report → **owner go-ahead** → apply (Layer A only).
 - **Authority:** Thompson is named approver; **Liss authorised** this greenfield run (2026-06-19).
-- **Last update:** 2026-06-19.
+- **Last update:** 2026-06-23.
+
+## Execution status — 2026-06-23 (update 6 — delivery sample data: epics/stories/bugs + sprints)
+
+Added a software-delivery slice on board **546 "PMO SCRUM"** to demonstrate hybrid (Agile) execution:
+
+- ✅ **3 Epics:** PMOD-55 Customer Portal — Account Management · PMOD-56 Customer Portal — Payments & Billing · PMOD-57 ERP Integration Layer.
+- ✅ **6 Stories** (epic-parented, with **original estimates**): PMOD-58 Self-service profile editing (3d, →55) · PMOD-59 Password reset via email OTP (2d, →55) · PMOD-60 Saved payment methods (5d, →56) · PMOD-61 Invoice download PDF (2d, →56) · PMOD-64 ERP order sync API (8d, →57) · PMOD-65 Inventory webhook listener (5d, →57).
+- ✅ **3 Bugs** (epic-parented, estimates + priority): PMOD-62 Profile save fails on special characters (1d, High, →55) · PMOD-63 Duplicate charge on payment retry (4h, Highest, →56) · PMOD-66 Order sync drops line items over 50 (2d, High, →57).
+- ✅ **2 Sprints on board 546:** **Sprint 1 = 1919 (ACTIVE)** [PMOD-58/59/62/63] · **Sprint 2 = 1920 (future)** [PMOD-60/61/64]. Backlog: PMOD-65, PMOD-66.
+- ❌ **Components & Versions — BLOCKED via MCP (new tool gap).** The Admin MCP has **no** `create_component` / `create_version` tool (confirmed by name lookup); Jira rejects unknown names on create/update (`Version name 'Release 1.0' is not valid`). **Action:** create in-app (Project settings → Components and → Releases), then stamp onto the 9 issues via `update_issue`.
+  - **Proposed Components:** Frontend · Backend · Integration · Payments.
+  - **Proposed Versions (Releases):** Release 1.0 · Release 1.1 · Release 2.0.
+  - **Intended mapping (issue → component / fixVersion):** 58 Frontend/R1.0 · 59 Backend/R1.0 · 62 Frontend/R1.0 · 60 Payments/R1.1 · 61 Frontend/R1.1 · 63 Payments/R1.1 · 64 Integration/R2.0 · 65 Backend/R2.0 · 66 Integration/R2.0.
 
 ## Execution status — 2026-06-19 (update 5 — automation rules built in-app)
 
@@ -99,11 +112,11 @@ Reused (3, to avoid duplicates): **Budget** `cf_11673` (number), **Likelihood**
 | A9 | ❌ | Approval — UAT sign-off | Manual/workflow-approval config — not done (sits with Xray Test Plan, Layer C) |
 | A10 | ✅ | Forms | DONE — Enhancement Intake (conditional AI) + Project Intake (id fdf2021d) both created |
 | A11 | ◧ | Automation | 6 of 8 rules built in-app (1 Variance/RAG, 2 Action reminders, 3 Risk escalation, 5 Readiness, 7 UAT criteria, 8 High-sev alert); **Rule 4 (Mandatory Hold Reason) & Rule 6 (Enhancement stage notifications) pending**. MCP create_automation_rule still blocked |
-| A12 | ☐ | Boards & sprints | Enhancement board + quick filters; Sprint 1 (closed) + Sprint 2 (active) |
+| A12 | ✅ | Boards & sprints | DONE — board 545 "Enhancement Board" (Sprint 1=1917 closed, Sprint 2=1918 active) **+ board 546 "PMO SCRUM"** (Sprint 1=1919 active, Sprint 2=1920 future) for the epics/stories/bugs delivery slice |
 | A13 | ◧ | Dashboards | 2 containers created — Portfolio (10100) + Defect (10101); gadgets added in-app |
 | A14 | ◧ | Permissions | Scheme **10510** + 29 grants created (4 roles); PMO Admin role seeded (Liss). **Project-assignment NOT possible via MCP** (no assign-permission-scheme-to-project tool) → assign in-app |
 | A15 | ◧ | Issue security | Scheme 10133 + level 10101 created; member-add + project-assign BLOCKED (tool bugs) |
-| A16 | ✅ | Sample data | DONE — 30 core issues + RAID set added (Issue/Assumption/Decision/Dependency/Action ×3 = PMOD-40..54, Dependency added to scheme 12122). 4 Projects, 9 milestones, 6 risks, 10 enhancements (2 sprints), 1 defect |
+| A16 | ✅ | Sample data | DONE — 30 core issues + RAID set (Issue/Assumption/Decision/Dependency/Action ×3 = PMOD-40..54, Dependency added to scheme 12122). 4 Projects, 9 milestones, 6 risks, 10 enhancements (2 sprints), 1 defect. **+ delivery slice PMOD-55..66** (3 epics, 6 stories, 3 bugs; original estimates; sprints 1919 active / 1920 future on board 546). Components/versions pending in-app (no MCP tool) |
 
 ## Layer B — BigPicture (⏭️ manual-required) · Layer C — Xray (⏭️ manual-required)
 
