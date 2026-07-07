@@ -27,6 +27,7 @@
 // CONFIG
 final String CASE_ID_FIELD = 'customfield_XXXXX' // <-- Case ID custom field ID
 final String CASE_ID_NAME  = 'Case ID'           // <-- exact field name, used in JQL
+final String ISSUE_TYPE    = 'Audit Review'      // <-- scope numbering to this issue type ('' = all types)
 // ---------------------------------------------------------------------------
 
 def issueKey = issue.key
@@ -46,8 +47,14 @@ if (existing != null && existing.toString().trim()) {
 // 2) Current calendar year.
 def year = new Date().format('yyyy')
 
-// 3) Highest sequence already issued this year (enhanced search, paginated).
-def jql = "project = \"${projectKey}\" AND \"${CASE_ID_NAME}\" ~ \"${year}\" ORDER BY created ASC"
+// 3) Highest sequence ALREADY ISSUED this year (enhanced search, paginated).
+//    IMPORTANT: we key off "has a YYYY- Case ID", NOT a count of current-status
+//    matches. A number, once assigned, is taken forever — even if the ticket
+//    later moves to Not Relevant / Existing Case or is closed. Deriving from a
+//    COUNT (or filtering by current status) would shrink when tickets move and
+//    would produce DUPLICATE ids. Always MAX(existing ids) + 1.
+def typeClause = ISSUE_TYPE ? " AND issuetype = \"${ISSUE_TYPE}\"" : ""
+def jql = "project = \"${projectKey}\"${typeClause} AND \"${CASE_ID_NAME}\" ~ \"${year}\" ORDER BY created ASC"
 
 int maxSeq = 0
 String nextPageToken = null

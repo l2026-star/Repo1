@@ -47,6 +47,25 @@ post-function if you prefer it living in the workflow.
 
 Neither is truly concurrency-proof on Cloud; both are safe for demo-scale traffic.
 
+### ⚠️ Generate from MAX, never from COUNT
+
+The next number must come from the **highest Case ID already assigned**, not from
+a count of tickets in a given status. A query like
+
+```
+project = X AND issuetype = "Audit Review" AND created >= startOfYear()
+       AND status not in (New, "Not Relevant", "Existing Case")
+```
+
+is a fine *report* of "audit reviews in progress this year", but it is unsafe as
+an ID source: its result set **shrinks** when a ticket is deleted or moves to an
+excluded status, so `count + 1` will re-issue a number that's already in use
+(e.g. move `2026-050` to Not Relevant → count drops → next ticket collides at
+`2026-095` twice). The scripts therefore search on **"has a `YYYY-` Case ID"**
+(scoped to project + issue type) and take **MAX + 1** — a number, once assigned,
+stays assigned regardless of the ticket's later status. Scope by issue type with
+the `ISSUE_TYPE` config value.
+
 ### How the first number is derived
 
 There is **no stored counter**. Each run re-derives the number: it searches
