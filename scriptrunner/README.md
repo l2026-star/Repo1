@@ -9,6 +9,7 @@ Assigns a unique, human-readable **Case ID** in the form `YYYY-NNN`
 > | --- | --- | --- |
 > | **Cloud** (`*.atlassian.net`) — recommended | Script **Listener** (REST API) | `assign-case-id-listener-CLOUD.groovy` |
 > | **Cloud** — alternative | Workflow **post-function** (REST API) | `assign-case-id-postfunction-CLOUD.groovy` |
+> | **Cloud** — counter-based | Workflow **post-function**, project-property counter | `assign-case-id-postfunction-CLOUD-counter.groovy` |
 > | Server / Data Center | Workflow **post-function** (Java API) | `assign-case-id-postfunction-SERVER-DC.groovy` |
 >
 > `di-demo.atlassian.net` is **Cloud**, so use a CLOUD file.
@@ -31,6 +32,20 @@ post-function if you prefer it living in the workflow.
 | **New / Not Relevant / Existing Case** are ignored | They never make that transition, so they get no ID and **consume no number**. |
 | Sequential per calendar year, resets each year | Sequence = highest existing `YYYY-*` value + 1; a new year finds nothing and starts at `001`. |
 | No duplicate / no re-numbering | Idempotency guard: if the issue already has a Case ID, the script exits. |
+
+### Two ways to derive the number
+
+- **JQL max+1** (`...-listener-CLOUD` / `...-postfunction-CLOUD`): reads existing
+  `YYYY-*` IDs and adds 1. Always reflects real data (self-healing) but relies on
+  the search index, which lags a second or two on Cloud — rapid transitions can
+  collide.
+- **Project-property counter** (`...-postfunction-CLOUD-counter`): keeps a
+  per-year count in a project property and increments it. Strongly-consistent
+  reads (no index lag) and fast, but trusts the stored number (drifts if the
+  property is reset) and is still not atomic — Jira Cloud has no compare-and-set,
+  so simultaneous transitions can still collide. Good default for a demo.
+
+Neither is truly concurrency-proof on Cloud; both are safe for demo-scale traffic.
 
 ### How the first number is derived
 
