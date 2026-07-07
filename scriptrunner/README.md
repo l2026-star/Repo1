@@ -7,10 +7,21 @@ Assigns a unique, human-readable **Case ID** in the form `YYYY-NNN`
 >
 > | Your Jira | Use | File |
 > | --- | --- | --- |
-> | **Cloud** (`*.atlassian.net`) | Script **Listener** (REST API) | `assign-case-id-listener-CLOUD.groovy` |
+> | **Cloud** (`*.atlassian.net`) — recommended | Script **Listener** (REST API) | `assign-case-id-listener-CLOUD.groovy` |
+> | **Cloud** — alternative | Workflow **post-function** (REST API) | `assign-case-id-postfunction-CLOUD.groovy` |
 > | Server / Data Center | Workflow **post-function** (Java API) | `assign-case-id-postfunction-SERVER-DC.groovy` |
 >
-> `di-demo.atlassian.net` is **Cloud**, so use the CLOUD file.
+> `di-demo.atlassian.net` is **Cloud**, so use a CLOUD file.
+
+### Cloud: Listener vs post-function
+You **can** use a ScriptRunner post-function on Cloud (workflow editor → transition
+→ Post functions → "Custom script post-function"). The logic is identical (and it
+needs no changelog check, since it's bound to the one transition). The reason the
+**Listener** is recommended: on Cloud a post-function that updates the *same issue
+that is transitioning* can race the transition commit, so the value occasionally
+fails to stick under rapid/parallel transitions. Adaptavist recommends a Listener
+for modifying the transitioning issue. For a demo either is fine — pick the
+post-function if you prefer it living in the workflow.
 
 ## Why it works the way you asked
 
