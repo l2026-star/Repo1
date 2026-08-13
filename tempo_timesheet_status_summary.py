@@ -68,6 +68,15 @@ PROGRAMS = ["DAIL", "Workforce", "Core", "Strategy", "Infrastructure", "Cyber", 
 DEFAULT_WORKLOAD_SCHEME = "Default Workload Scheme"
 EXCLUDE_LEADS_AND_DEFAULT_WORKLOAD = True
 
+# Debug / reconciliation ----------------------------------------------------
+# DEBUG = True prints, per team per week, the RAW member count, the status
+# breakdown, and how many were excluded - so you can match a single team+week
+# against the Tempo UI and find where a count mismatch comes from.
+# Optionally restrict debug output to one team + one week to keep it readable:
+DEBUG           = False
+DEBUG_TEAM_LIKE = ""            # e.g. "Core Platform" - substring match on team name ("" = all)
+DEBUG_WEEK_MON  = ""            # e.g. "2026-07-07"   - the Monday of one week ("" = all weeks)
+
 # Reporting window ----------------------------------------------------------
 # AUTO_LAST_N_WEEKS > 0  -> last N full Mon..Sun weeks up to last Sunday.
 #                           8 ~= 2 months, 13 ~= 3 months.
@@ -228,26 +237,56 @@ def get_user_display_name(account_id):
 
 # -- Fetch one team, one week -------------------------------------------------
 
+ERRORED_TEAMS = []   # (team_name, week_from, reason) for teams that couldn't be read
+
+
+def _debug_match(team_name, from_date):
+    if not DEBUG:
+        return False
+    if DEBUG_TEAM_LIKE and DEBUG_TEAM_LIKE.lower() not in team_name.lower():
+        return False
+    if DEBUG_WEEK_MON and DEBUG_WEEK_MON != from_date:
+        return False
+    return True
+
+
 def get_team_week(team, program, from_date, to_date, lead_ids, default_workload_ids):
     """Return list of {accountId, status_key, program, team} for a team+week."""
     url = f"{TEMPO_BASE_URL}/timesheet-approvals/team/{team['id']}?from={from_date}&to={to_date}"
     try:
         r = requests.get(url, headers=TEMPO_HEADERS)
-        r.raise_for_status()
-        out = []
-        for result in r.json().get("results", []):
-            user_id = result["user"]["accountId"]
-            if EXCLUDE_LEADS_AND_DEFAULT_WORKLOAD:
-                if user_id in lead_ids or user_id in default_workload_ids:
-                    continue
+        if r.status_code != 200:
+            ERRORED_TEAMS.append((team["name"], from_date, f"HTTP {r.status_code}"))
+            print(f"    ! {team['name']} [{from_date}] -> HTTP {r.status_code} (skipped)")
+            return []
+        results = r.json().get("results", [])
+
+        out           = []
+        raw_by_status = defaultdict(int)   # before exclusions
+        excluded      = 0
+        for result in results:
+            user_id    = result["user"]["accountId"]
+            status_key = (result.get("status") or {}).get("key", "UNKNOWN")
+            raw_by_status[status_key] += 1
+            if EXCLUDE_LEADS_AND_DEFAULT_WORKLOAD and (user_id in lead_ids or user_id in default_workload_ids):
+                excluded += 1
+                continue
             out.append({
                 "accountId":  user_id,
-                "status_key": (result.get("status") or {}).get("key", "UNKNOWN"),
+                "status_key": status_key,
                 "program":    program,
                 "team":       team["name"],
             })
+
+        if _debug_match(team["name"], from_date):
+            raw_total = sum(raw_by_status.values())
+            breakdown = ", ".join(f"{k}={v}" for k, v in sorted(raw_by_status.items()))
+            print(f"    [DEBUG] {team['name']} [{from_date}]  members={raw_total}  "
+                  f"excluded={excluded}  kept={len(out)}  | raw: {breakdown or '(none)'}")
+
         return out
     except Exception as e:
+        ERRORED_TEAMS.append((team["name"], from_date, str(e)))
         print(f"    Error on {team['name']} [{from_date}]: {e}")
         return []
 
@@ -383,6 +422,12 @@ def main():
     print(f"  Rejected/Other    : {totals['other']}")
     print(f"  Open detail rows  : {len(open_rows)}")
     print(f"  Status keys seen  : {', '.join(sorted(seen_status_keys)) or '(none)'}")
+    print(f"  Teams skipped/err : {len(ERRORED_TEAMS)}"
+          + (f"  (these users are NOT in the totals)" if ERRORED_TEAMS else ""))
+    for tname, twf, reason in ERRORED_TEAMS[:20]:
+        print(f"      - {tname} [{twf}]: {reason}")
+    if len(ERRORED_TEAMS) > 20:
+        print(f"      ... and {len(ERRORED_TEAMS) - 20} more")
     print(f"\n  Workbook saved    : {OUTPUT_XLSX}")
     print("=" * 60)
     unmapped = [k for k in seen_status_keys if bucket_for(k) == 'other']
